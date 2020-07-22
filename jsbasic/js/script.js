@@ -10,11 +10,23 @@ const personalMovieDatabase = {
     private: false
 };
 
-const a = prompt("Один из последних просмотренных фильмов?", ""),
-      b = +prompt("На сколько его оцените по 10 балльной школе", ""),
-      c = prompt("Один из последних просмотренных фильмов?", ""),
-      d = +prompt("На сколько его оцените по 10 балльной школе", "");
+for (let i = 0; i < 2; ++i) {
+    let a = prompt("Один из последних просмотренных фильмов?", ""),
+        b = +prompt("На сколько его оцените по 10 балльной школе", "");
+    if (a === "" || !a || a.length > 50) {
+        alert("Некорректное название фильма, повторите");
+        --i;
+        continue;
+    }
+    personalMovieDatabase.movies[a] = b;
+}
 
-personalMovieDatabase.movies[a] = b;
-personalMovieDatabase.movies[c] = d;
+if (personalMovieDatabase.count < 10) {
+    alert("Просмотрено мало фильмов");
+} else if (personalMovieDatabase.count >= 10 && 
+           personalMovieDatabase.count < 30) {
+    alert("Вы классический зритель");
+} else {
+    alert("Вы киноман");
+}
 
