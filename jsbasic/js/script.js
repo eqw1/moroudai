@@ -2,21 +2,17 @@
 "use strict";
 
 const personalMovieDB = {
-    personalMovieDatabase: {
-        count: 0,
-        movies: {},
-        actors: {},
-        genres: [],
-        private: false
-    },
+    count: 0,
+    movies: {},
+    actors: {},
+    genres: [],
+    private: false,
 
     start: function() {
-        let numberOfFilms;
         // isNaN - is not a number проверка на то, что значение числовое
-        while (numberOfFilms == "" || !numberOfFilms || isNaN(numberOfFilms)) {
-            numberOfFilms = +prompt("Сколько фильмов вы посмотрели?", "");
-        }
-        this.personalMovieDatabase.count = numberOfFilms;
+        do  {
+            this.count = +prompt("Сколько фильмов вы посмотрели?", "");
+        } while (this.count == "" || !this.count || isNaN(this.count));
     },
 
     rememberMyFilms: function() {
@@ -28,15 +24,15 @@ const personalMovieDB = {
                 --i;
                 continue;
             }
-            this.personalMovieDatabase.movies[a] = b;
+            this.movies[a] = b;
         }
     },
 
     detectPersonalLevel: function() {
-        if (this.personalMovieDatabase.count < 10) {
+        if (this.count < 10) {
             alert("Просмотрено мало фильмов");
-        } else if (this.personalMovieDatabase.count >= 10 && 
-                this.personalMovieDatabase.count < 30) {
+        } else if (this.count >= 10 && 
+                this.count < 30) {
             alert("Вы классический зритель");
         } else {
             alert("Вы киноман");
@@ -44,8 +40,8 @@ const personalMovieDB = {
     },
 
     showMyDB: function() {
-        if (!this.personalMovieDatabase.private) {
-            console.log(this.personalMovieDatabase);
+        if (!this.private) {
+            console.log(this);
         } else {
             console.log("Данные недоступны");
         }
@@ -57,15 +53,15 @@ const personalMovieDB = {
             while (temp == "" || !temp) {
                 temp = prompt(`Ваш любимый жанр номер ${i+1}?`, "");
             }
-            this.personalMovieDatabase.genres[i] = temp;
+            this.genres[i] = temp;
         }
-        this.personalMovieDatabase.genres.forEach(function(val, i) {
+        this.genres.forEach(function(val, i) {
             console.log(`Любимый жанр №${i+1} - это ${val}`);
         });
     },
 
     toggleVisibleMyDB: function() {
-        this.personalMovieDatabase.private = !this.personalMovieDatabase.private;
+        this.private = !this.private;
     }
 };
 
